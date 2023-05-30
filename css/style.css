@@ -1,8 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lexend+Deca&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Lexend Deca', sans-serif;
 }
 body{
-    background-color: rgb(44, 190, 227);
+    display: flex;
+    background:url('https://png.pngtree.com/thumb_back/fw800/background/20221226/pngtree-medical-health-publicity-hygienic-blue-simple-background-image_1495939.jpg') no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#espacio_menu{
+    position: relative;
+    height: 100vh;
+    width: 15vw;
+}
+
+#espacio_menu #menu{
+    position: fixed;
+    height: 100vh;
+    width: 15vw;
+    /*background-color: #0A3035;*/
+    background-color: #066674;
+}
+
+#menu h1{
+    width: auto;
+    text-align: center ;
+    margin: 20% 0;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+#menu form{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#menu form ul{
+    list-style: none;
+    width: 100%;    
+}
+
+form ul li{
+    margin: 5% 0;
+    padding: 0 5%;
+}
+
+li h4{
+    margin-bottom: 3px;
+    font-weight: 400;
+    color: white;
+}
+
+li .select_filtro{
+    width: 100%;
+    height: 35px;
+    padding: 0 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: rgb(197, 191, 191);
+    border: 1px solid grey;
+    border-radius: 10px ;
+    font-weight: 900;
+}
+
+.select_filtro option{
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+#menu form .btn{
+    width: 100px;
+    height: 40px;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-color: black;
+    transition: all 0.3s ease;
+}
+
+#menu form .btn:hover{
+    border: 2px solid black;
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: 1px 1px 10px 2px black;
+    cursor: pointer;
+}
+
+#menu .logo{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#menu .logo h1{
+    width: auto;
+    text-align: center ;
+    margin: 5% 0;
+    font-size: 20px;
+    font-weight: 900;
+    color: white;
+}
+
+#menu .logo img{
+    height: auto;
+    width: 100%;
+}
+
+
+/*==============================================================*/
+
+#principal{
+    display: block;
+    height: 100vh;
+    width: 85vw;
+}
+
+#principal #titulo_indicador{
+    width: 100%;
+    height: 10%;
+    background-color: rgba(45, 44, 44, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid black;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+#principal #contenido{
+    height: 90%;
+    width: 100%;
+    display: flex;
+}
+
+#contenido #graficas{
+    height: 100%;
+    width: 65%;
+}
+
+#graficas .grafica_1,
+#graficas .grafica_2{
+    height: 49%;
+    width: 98%;
+    margin: 1% 1% 0 1%;
+    border: 1px solid black;
+    border-radius: 50px;
+}
+
+#graficas .grafica_1{
+    display: flex;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.555);
+    backdrop-filter: blur(5px);
+}
+.grafica_1 img{
+    height: 100%;
+    width: 30%;
+}
+
+#graficas .grafica_2{
+    background: url('https://gcoch.github.io/D3-tutorial/images/barras9.png') no-repeat center;
+    background-size: contain;
+    background-color: rgba(255, 255, 255, 0.555);
+    backdrop-filter: blur(5px);
+}
+
+
+#contenido #ind_map{
+    height: 100%;
+    width: 35%;
+}
+
+#ind_map .grupo_tarjetas{
+    height: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.grupo_tarjetas .tarjeta{
+    height: 100%;
+    width: 33%;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+}
+
+#ind_map #mapa{
+    height: 84%;
+    width: 100%;
+    margin-top: 1%;
+    background: url('../source/mapa_colombia.png') no-repeat center;
+    background-color: rgba(255, 255, 255, 0.7);
+    background-size: contain;
+    border: 2px solid white;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+}
+
+/*===============================================*/
+
+#principal #tabla{
+    width: 100%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.232);
+    border-radius: 100px;
+    backdrop-filter: blur(5px);
 }

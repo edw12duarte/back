@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Dashboard indicadores de salud</title>
+</head>
+<body>
+    <section id="espacio_menu">
+        <section id="menu">
+            <h1>Indicadores Monitoreo de la calidad de la Atención IPS - Efectividad</h1>
+            <form action="" method="POST">
+                <ul>
+                    <li>
+                        <h4>Indicadores</h4>
+                        <select class="select_filtro" name="id_indicador">
+                            <option value="9999999">Todos</option>
+                            <option value="9999999">1</option>
+                            <option value="9999999">2</option>
+                            <option value="9999999">3</option>
+                            <option value="9999999">4</option>
+                            <option value="9999999">5</option>
+                            <option value="9999999">6</option>
+                        </select>
+                    </li>
+                    <li>
+                        <h4>Departamento</h4>
+                        <select class="select_filtro" name="id_region">
+                            <option value="9999999">Todos</option>
+                        </select>
+                        
+                    </li>
+                    <li>
+                        <h4>Fecha</h4>
+                        <select class="select_filtro" name="id_fecha">
+                            <option value="9999999">Todos</option>
+                        </select>
+                    </li>
+                </ul>
+                <input class="btn" type="submit" name="filtros" value="Filtrar">
+            </form>
+            <div class="logo">
+                <h1>Ministerio de salud y proteccion social</h1>
+                <img src="source/1370px-Minsalud_Colombia.svg.png" alt="logo_minsalud">
+            </div>
+        </section>
+    </section>
+    <section id="principal">
+        <div id="titulo_indicador">
+            <h1>Nombre del indicador actual</h1>
+        </div>
+        <div id="contenido" >
+            <div id="graficas">
+                <div class="grafica_1">
+                    <img src="https://img.freepik.com/vector-premium/grafico-grafico-red-arana-radar-circulo-elemento-infografia_627350-1263.jpg?w=2000" alt="">
+                    <img src="https://img.genial.ly/5eff154b64e44a2d5175eaed/534c6e55-333f-48d6-812c-aa722144fa24.png" alt="">
+                    <img src="https://t2.uc.ltmcdn.com/es/posts/0/6/6/como_calcular_los_valores_en_los_graficos_circulares_1660_paso_1_600.jpg" alt="">
+                </div>
+                <div class="grafica_2"></div>
+            </div>
+            <div id="ind_map">
+                <div class="grupo_tarjetas">
+                    <div class="tarjeta">
+                        <h3>Valor indicador país</h3>
+                        <h1>Valor: 100</h1>
+                        <h5>unidades</h5>
+                    </div>
+                    <div class="tarjeta">
+                        <h3>Valor indicador departamento </h3>
+                        <h1>Valor: 100</h1>
+                        <h5>unidades</h5>
+                    </div>
+                    <div class="tarjeta">
+                        <h3>Valor indicador municipio</h3>
+                        <h1>Valor: 100</h1>
+                        <h5>unidades</h5>
+                    </div>
+                </div>
+                <div id="mapa"></div>
+            </div>
+        </div>
+        <section id="tabla">
+        </section>
+    </section>
+</body>
+</html>
