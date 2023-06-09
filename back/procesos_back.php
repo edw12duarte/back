@@ -9,31 +9,22 @@
             $nombre_indicador = $indicadores['nombre_indicador'];
 
             echo '
-                    <option value="'.$indicador_id.'">'.$nombre_indicador.'</option>
+                <option value="'.$indicador_id.'">'.$nombre_indicador.'</option>
             ';
-
         }
     }
 
-
-/*  <form action="" method="POST">
-        <ul>
-            <li>
-                <h4>Departamento</h4>
-                <select class="select_filtro" name="id_region">
-                    <option value="9999999">Todos</option>
-                </select>
-                
-            </li>
-            <li>
-                <h4>Fecha</h4>
-                <select class="select_filtro" name="id_fecha">
-                    <option value="9999999">Todos</option>
-                </select>
-            </li> 
-        </ul>
-        
-    </form>
-    */
+    function envio_filtros(){
+        if(isset($_POST['filtros'])){
+            $id_indicador = $_POST['id_indicador'];
+            $id_departamento = $_POST['id_departamento'];
+            $id_fecha = $_POST['id_fecha'];
+            
+            echo '<h1>id indicador= '.$id_indicador.'<br>
+                    id departamento='.$id_departamento.'<br>
+                    id fecha = '.$id_fecha.'
+                </h1>';
+        }
+    }
 ?>
 

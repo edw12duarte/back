@@ -69,11 +69,13 @@ li .select_filtro{
     border: 1px solid grey;
     border-radius: 10px ;
     font-weight: 900;
+    overflow-y: auto;
 }
 
 .select_filtro option{
     background-color: rgba(0, 0, 0, 0.9);
 }
+
 
 #menu form .btn{
     width: 100px;
@@ -106,7 +108,7 @@ li .select_filtro{
     width: auto;
     text-align: center ;
     margin: 5% 0;
-    font-size: 120%;
+    font-size: 10px;
     font-weight: 900;
     color: white;
     text-shadow: 5px 5px 10px black;

@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>-->
     <title>Dashboard indicadores de salud</title>
 </head>
 
@@ -21,30 +22,28 @@ include 'back/procesos_back.php';
                 <ul>
                     <li>
                         <h4>Indicadores</h4>
-                        <select  id="id_indicador" class="select_filtro" name="id_indicador" onchange="cambiar()">
-                            
-                            <option value="9999999">Todos</option>
-                            <option value="1111">Todos1</option>
+                        <!--<select  id="id_indicador" class="select_filtro" name="id_indicador" onchange="cambiar()">-->
+                        <select  id="filtro_indicador" class="select_filtro" name="id_indicador">
                             <?php
-                                //traer_options($conexion);
+                                traer_options($conexion);
                             ?>
                         </select>
                     </li>
                     <li>
                         <h4>Departamento</h4>
-                        <select class="select_filtro" name="id_region">
-                            <option value="9999999">Todos</option>
+                        <select id="filtro_departamento" class="select_filtro" name="id_departamento">
+                            <option value="0">Todos</option>
                         </select>
                         
                     </li>
                     <li>
                         <h4>Fecha</h4>
-                        <select class="select_filtro" name="id_fecha">
-                            <option value="9999999">Todos</option>
+                        <select id="filtro_fecha" class="select_filtro" name="id_fecha">
+                            <option value="0">Todos</option>
                         </select>
                     </li> 
                 </ul>
-                <input class="btn" type="submit" name="traer_id" value="Mostrar">
+                <input class="btn" type="submit" name="filtros" value="Mostrar">
             </form>
 
             <div class="logo">
@@ -86,7 +85,7 @@ include 'back/procesos_back.php';
             </div>
             <div class="grafica_4">
                 <?php
-                    include 'back/datos_ajax.php';
+                    envio_filtros();
                 ?>
             </div>
         </div>

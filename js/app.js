@@ -1,60 +1,33 @@
 
-function cambiar(){
-    var cambio= document.getElementById('id_indicador').value;
-    var data_end = 'id_indicador='+cambio;
+//funcion que agrega las options traidas con el ajax
+var insertar_options = function(respuesta){
 
-    $.ajax({
-        data: data_end, 
-        url: 'back/datos_ajax.php',
-        type: 'POST',
-        beforesend: function() {
-            alert('paila');
-            },
-        success: function (mensaje_oper) {
-            alert('Funciono '+ mensaje_oper);
-        }
-        })
+    respuesta_departamento = respuesta.split('///')[0];
+    respuesta_fecha = respuesta.split('///')[1];
+
+    $('#filtro_departamento').html(respuesta_departamento);
+    $('#filtro_fecha').html(respuesta_fecha);
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-let ajax_ind = function(){
-    var opt_act = $('.select_filtro').val();
-    console.log(opt_act);
+//llamado ajax a selects_dinamicos.php
+var ajax_ind = function(){
+    var opt_act = $('#filtro_indicador').val();
 
     $.ajax({
-        url: 'back/datos_ajax.php',
-        type: 'POST',
+        url: "back/selects_dinamicos.php",
+        type:  "POST",
         datatype: 'json',
-        data: {
-            id_ind : opt_act
+        data: {id_indicador : opt_act},
+        success: function(respuesta) {
+            insertar_options(respuesta);
         },
-        success: function(data) {
-            alert('Datos enviados satifactoriamente');
-        },
-        error: function(data){
-            alert('Error en el envio')
+        error: function(){
+            alert('Error en el envio:')
         }
-    }).done(
-        console.log('exito '+ opt_act)
-    );
+    })
 }
+
 
 $(document).ready(ajax_ind);
-
-$('.select_filtro').change(ajax_ind);
-*/
+$('#filtro_indicador').change(ajax_ind);
