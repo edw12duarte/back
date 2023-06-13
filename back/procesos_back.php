@@ -14,6 +14,7 @@
         }
     }
 
+    /*
     function envio_filtros(){
         if(isset($_POST['filtros'])){
             $id_indicador = $_POST['id_indicador'];
@@ -26,6 +27,6 @@
                 </h1>';
         }
     }
-
+    */
 ?>
 

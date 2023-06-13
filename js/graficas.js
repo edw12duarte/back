@@ -1,76 +1,53 @@
 
-//Grafica 2: semi-circulo_1
+//Grafica 1-2: semi-circulo
+/*Necesita 3 parametros
+    contenedor: id del contenedor de la grafica
+    titulo: string con el titulo de la grafica
+    valor : numero que mostrara la grafica
+*/
 
-function indicador_pais(){ 
-    let tarjeta_1 = document.getElementById('tarjeta_1');
+function indicador_semi_circulo(contenedor, titulo, valor){ 
+    let tarjeta = $('#'+contenedor);
     var data1 = [
         {
             domain: { x: [0, 1], y: [0, 1] },
-            value: 500,
-            title: { text: "Indicador pais" },
+            value: valor,
+            title: { text: titulo , font:{size:15} },
             type: "indicator",
             mode: "gauge+number",
-            delta: { reference: 400 },
-            gauge: { axis: { range: [0, 900] } }
+            delta: { reference: 50 },
+            gauge: { axis: { range: [0, 100] } }
         }
     ];
 
     var layout1 = { 
-        width: tarjeta_1.clientWidth , 
-        height: tarjeta_1.clientHeight,
+        width: tarjeta.width(), 
+        height: tarjeta.height(),
         margin:{t:50, b:5, l:0, r:0},
         paper_bgcolor:"#C2BFBF",
         font:{size:10, color:'000000'}
     };
 
-    Plotly.newPlot('tarjeta_1', data1, layout1);
-}
-
-
-
-//Grafica 2: semi-circulo_2
-
-function indicador_departamento(){
-    let tarjeta_2 = document.getElementById('tarjeta_2');
-    var data2 = [
-        {
-            domain: { x: [0, 1], y: [0, 1] },
-            value: 500,
-            title: { text: "Indicador Departamento", font:{size:15}},
-            type: "indicator",
-            mode: "gauge+number",
-            delta: { reference: 400 },
-            gauge: { axis: { range: [0, 900] } }
-        }
-    ];
-
-    var layout2 = { 
-        width: tarjeta_2.clientWidth , 
-        height: tarjeta_2.clientHeight,
-        margin:{t:50, b:5, l:0, r:0},
-        paper_bgcolor:"#C2BFBF",
-        font:{size:10, color:'000000'}
-    };
-
-Plotly.newPlot('tarjeta_2', data2, layout2);
+    Plotly.newPlot(contenedor, data1, layout1);
 }
 
 
 //grafica 3: Linea de tiempo indicador por region
 
-function indicador_vs_anos(){
-    let grafica_1 = document.getElementById('grafica1');
+function grafica_linea(datos, nombre_departamento){
+    let grafica_1 = $('#grafica1');
     var data3 = [
         {
-            x: ['2015','2016', '2017', '2018', '2019', '2020'],
-            y: [1, 3, 6, 7, 2, 10],
-            type: 'scatter'
+            x: Object.keys(datos),
+            y: Object.values(datos),            
+            type: 'scatter',
+            line: {shape: 'spline', dash: 'dot'}
         }
     ];
     var layout3 = {
-        title:{text:'Indicador vs años', font:{size:'25', family:'Lexend Deca', color:'000000', weight:'bold'}},
-        width: grafica_1.clientWidth , 
-        height: grafica_1.clientHeight,
+        title:{text: nombre_departamento, font:{size:'25', family:'Lexend Deca', color:'000000', weight:'bold'}},
+        width: grafica_1.width() , 
+        height: grafica_1.height(),
         margin:{t:40, b:15, l:20, r:10},
         paper_bgcolor:"#C2BFBF",
         font:{size:10, color:'000000'},
@@ -85,10 +62,10 @@ Plotly.newPlot('grafica1', data3, layout3);
 
 //grafica 4: top barras -> indicador por municipio
 
-function top_municipios(){
-    let barras_muni = document.getElementById('muni_barras_top');
-    var yValue = ['Product A', 'Product B', 'Product C'];
-    var xValue = [200, 140, 213];
+function top_municipios(dm, titulo){
+    let barras_muni = $('#muni_barras_top');
+    var yValue = Object.values(dm);
+    var xValue = Object.keys(dm);
 
     var trace1 = {
         x: xValue,
@@ -111,10 +88,10 @@ function top_municipios(){
     var data4 = [trace1];
 
     var layout4 = {
-        title:{text:'Top municipios', font:{size:'25', family:'Lexend Deca', color:'000000', weight:'bold'}},
+        title:{text: titulo, font:{size:'25', family:'Lexend Deca', color:'000000', weight:'bold'}},
         barmode: 'stack',
-        width: barras_muni.clientWidth , 
-        height: barras_muni.clientHeight,
+        width: barras_muni.width() , 
+        height: barras_muni.height(),
         margin:{t:40, b:20, l:1, r:10},
         paper_bgcolor:"#C2BFBF",
         font:{size:10, color:'000000'},
@@ -129,7 +106,7 @@ Plotly.newPlot('muni_barras_top', data4, layout4);
 //grafica 5: top barras -> indicador por ips
 
 function top_ips(){
-    let barras_ips = document.getElementById('ips_barras_top');
+    let barras_ips = $('#ips_barras_top');
     var yValue_2 = ['Edwin', 'Armando', 'Duarte', 'Segura'];
     var xValue_2 = [200, 140, 213, 70];
 
@@ -156,8 +133,8 @@ function top_ips(){
     var layout5 = {
         title:{text:'Top ips', font:{size:'25', family:'Lexend Deca', color:'000000', weight:'bold'}},
         barmode: 'group',
-        width: barras_ips.clientWidth , 
-        height: barras_ips.clientHeight,
+        width: barras_ips.width() , 
+        height: barras_ips.height(),
         margin:{t:40, b:20, l:1, r:10},
         paper_bgcolor:"#C2BFBF",
         font:{size:10, color:'000000'},
@@ -167,8 +144,29 @@ function top_ips(){
 Plotly.newPlot('ips_barras_top', data5, layout5);
 }
 
-indicador_pais();
-indicador_departamento();
-indicador_vs_anos();
-top_municipios();
-top_ips();
+/*
+    Cambia los textos del dashboard
+    nd: nombre departamento
+    ni: nombre indicador
+    f: factor
+*/
+function cambiar_nombres(nd, ni, f){
+
+    $('#titulo_tabla_1').text(nd);
+    $('#titulo_indicador').html('<h5>'+ni+'</h5>');
+    console.log(nd);
+    console.log(ni);
+    console.log(f);
+}
+
+
+$(document).ready(()=>{
+    cambiar_nombres(nombre_departamento,nombre_indicador, fecha);
+    indicador_semi_circulo('tarjeta_1','Indicador país', datos_indicador_pais);
+    indicador_semi_circulo('tarjeta_2','Indicador departamento', datos_indicador_depart);
+    grafica_linea(datos_grafica_linea, nombre_departamento);
+    top_municipios(datos_barras_muni, 'Top municipios '+nombre_departamento);
+    top_ips();
+});
+
+console.log(datos_barras_muni);

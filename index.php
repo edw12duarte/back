@@ -13,7 +13,7 @@
 
 <?php
     include 'back/procesos_back.php';
-    include 'back/datos_graficas.php'
+    include 'back/datos_graficas.php';
 ?>
 
 <body>
@@ -62,18 +62,18 @@
                     <div class="info_depart">
                         <table class="table">
                             <thead>
-                                <td class="titulo_tabla" colspan="3">Nombre del departamento</td>
+                                <td class="titulo_tabla" id='titulo_tabla_1' colspan="3"></td>
                                 <tr>
+                                    <td>Codigo departamento</td>
                                     <td>habitantes</td>
                                     <td>Bandera</td>
-                                    <td>Cod Departamento</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>codigo dep</td>
                                     <td>1000000</td>
                                     <td>bandera</td>
-                                    <td>codigo departamento</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -81,7 +81,7 @@
                     <div class="info_muni">
                         <table class="table">
                             <thead>
-                                <td class="titulo_tabla" colspan="3">Numero de municipios: <span>###</span></td>
+                                <td class="titulo_tabla" id='titulo_tabla_2' colspan="3">Numero de municipios: <span>###</span></td>
                                 <tr>
                                     <td>Municipio Mayor indicador</td>
                                     <td>Municipio Menor indicador</td>
@@ -98,7 +98,7 @@
                     <div class="info_ips">
                         <table class="table">
                             <thead>
-                                <td class="titulo_tabla" colspan="3">Numero de ips: <span>###</span></td>
+                                <td class="titulo_tabla" id='titulo_tabla_3' colspan="3">Numero de ips: <span>###</span></td>
                                 <tr>
                                     <td>Ips Mayor indicador</td>
                                     <td>IPS Menor indicador</td>
@@ -139,4 +139,7 @@
     <!--<script src="js/ajax.js"></script>
     <script src="js/jquery.min.js"></script>-->
 </body>
+<?php
+    //include 'back/datos_graficas.php';
+?>
 </html>
