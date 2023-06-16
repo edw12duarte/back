@@ -11,6 +11,12 @@ body{
     background-color: rgb(194, 191, 191);
 }
 
+.tarjeta_principal::-webkit-scrollbar {
+    background: black;
+    width: 5px;
+    height: 5px;
+}
+
 #espacio_menu{
     position: relative;
     height: 100vh;
@@ -165,18 +171,20 @@ li .select_filtro{
     height: 67%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;    
+    justify-content: space-between; 
+    overflow-y: auto;
 }
 
-.tarjeta_principal .info_depart,
-.tarjeta_principal .info_muni,
-.tarjeta_principal .info_ips{
-    height: 30%;
+.tarjeta_principal #info_depart,
+.tarjeta_principal #info_muni,
+.tarjeta_principal #info_ips{
+    height: auto;
     width: 100%;
     margin: 0.5% 0;
     background-color: white;
     border: 1px solid black;
     box-shadow: 5px 5px 10px black;
+    overflow-y: auto;
 }
 
 .table{
@@ -187,19 +195,23 @@ li .select_filtro{
 }
 
 .table thead td{
-    padding: 10px 0;
+    padding: 5px 0;
     background-color: rgb(177, 174, 174);
     color: white;
     font-size: 14px;
 }
 
-.table thead tr{
+.table thead tr td{
     font-weight: 900;
 }
+
 .table tbody tr{
     height: auto;
     border-bottom: transparent;
+    font-size: 15px;
+    border-bottom: 1px solid gray;
 }
+
 
 .graf_1 .tarjeta_info{
     width: 100%;
@@ -212,11 +224,28 @@ li .select_filtro{
     overflow: hidden;
 }
 
-#graficas .graf_1{
+#graficas #cont_graf_1{
     width: 100%;
     height: 32%;
     background-color: rgb(255, 255, 255);
     box-shadow: 5px 5px 10px black;
+}
+
+#cont_graf_1 .titulo_graf_linea{
+    text-align: center;
+    font-size: 16px;
+    font-weight: 900;
+    width: 100%;
+    height: 20%;
+    margin: 0;
+    color: black;
+    background-color: rgb(177, 174, 174);
+    overflow-y: auto;
+}
+
+#cont_graf_1 #grafica1{
+    width: 100%;
+    height: 80%;
 }
 
 #contenido #ind_map{
@@ -247,9 +276,9 @@ li .select_filtro{
 }
 
 #ind_map #mapa{
-    height: 78%;
-    width: 94%;
-    margin: 1% 3%;
+    height: 80%;
+    width: 100%;
+    margin: 3% 0 0 0;
     background: url('../source/mapa_colombia.png') no-repeat center;
     background-size: contain;
     backdrop-filter: blur(10px);
@@ -261,11 +290,32 @@ li .select_filtro{
     margin: 1% 2%;
 }
 
-.barras_top #muni_barras_top, .barras_top #ips_barras_top{
+.barras_top #cont_muni_barras, 
+.barras_top #cont_ips_barras{
     width: 100%;
     height: 49%;
     margin-top: 1%;
     box-shadow: 5px 5px 10px black;
+}
+
+#cont_muni_barras .titulo_muni_barras,
+#cont_ips_barras .titulo_ips_barras{
+    text-align: center;
+    font-size: 16px;
+    font-weight: 900;
+    width: 100%;
+    height: 15%;
+    margin: 0;
+    padding-top: 2%;
+    overflow-x: auto;
+    color: black;
+    background-color: rgb(177, 174, 174);
+}
+
+#cont_muni_barras #muni_barras_top, 
+#cont_ips_barras #ips_barras_top{
+    width: 100%;
+    height: 85%;
 }
 
 /*===============================================*/

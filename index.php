@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="https://cdn.plot.ly/plotly-2.24.1.min.js" charset="utf-8"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
     <title>Dashboard indicadores de salud</title>
 </head>
 
@@ -59,61 +61,70 @@
         <div id="contenido" >
             <div id="graficas">
                 <div class="tarjeta_principal">
-                    <div class="info_depart">
-                        <table class="table">
-                            <thead>
-                                <td class="titulo_tabla" id='titulo_tabla_1' colspan="3"></td>
-                                <tr>
-                                    <td>Codigo departamento</td>
-                                    <td>habitantes</td>
-                                    <td>Bandera</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>codigo dep</td>
-                                    <td>1000000</td>
-                                    <td>bandera</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="info_muni">
-                        <table class="table">
-                            <thead>
-                                <td class="titulo_tabla" id='titulo_tabla_2' colspan="3">Numero de municipios: <span>###</span></td>
-                                <tr>
-                                    <td>Municipio Mayor indicador</td>
-                                    <td>Municipio Menor indicador</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1000000</td>
-                                    <td>1</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="info_ips">
-                        <table class="table">
-                            <thead>
-                                <td class="titulo_tabla" id='titulo_tabla_3' colspan="3">Numero de ips: <span>###</span></td>
-                                <tr>
-                                    <td>Ips Mayor indicador</td>
-                                    <td>IPS Menor indicador</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1000000</td>
-                                    <td>1</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    
+                    <table class="table" id="info_depart">
+                        <thead>
+                            <td class="titulo_tabla" id='titulo_tabla_1' colspan="3"></td>
+                            <tr>
+                                <td>Codigo departamento</td>
+                                <td>habitantes</td>
+                                <td>Bandera</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>codigo dep</td>
+                                <td>1000000</td>
+                                <td>bandera</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                
+                    <table class="table" id="info_muni">
+                        <thead>
+                            <td class="titulo_tabla" colspan="3">Numero de municipios de <span id="titulo_tabla_2">###</span> : </td>
+                            <tr>
+                                <td>Municipio Mayor indicador</td>
+                                <td>Municipio Menor indicador</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>nombre muni mayor</td>
+                                <td>nombre muni menor</td>
+                            </tr>
+                            <tr>
+                                <td>1000000</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                
+                    <table class="table" id="info_ips">
+                        <thead>
+                            <td class="titulo_tabla" colspan="3">Numero de ips de <span id="titulo_tabla_3">###</span> :</td>
+                            <tr>
+                                <td>Ips Mayor indicador</td>
+                                <td>IPS Menor indicador</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>nombre ips mayor</td>
+                                <td>nombre ips menor</td>
+                            </tr>
+                            <tr>
+                                <td>1000000</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
                 </div>
-                <div id="grafica1" class="graf_1"></div>
+                <div id="cont_graf_1">
+                    <h3 class="titulo_graf_linea">Departamento</h3>
+                    <div id="grafica1" class="graf_1"></div>
+                </div>
             </div>
             <div id="ind_map">
                 <div class="grupo_tarjetas">
@@ -125,8 +136,14 @@
                 <div id="mapa"></div>
             </div>
             <div class="barras_top">
-                <div id="muni_barras_top"></div>
-                <div id="ips_barras_top"></div>
+                <div id="cont_muni_barras">
+                    <h3 class="titulo_muni_barras"></h3>
+                    <div id="muni_barras_top"></div>
+                </div>
+                <div id="cont_ips_barras">
+                    <h3 class="titulo_ips_barras"></h3>
+                    <div id="ips_barras_top"></div>
+                </div>
             </div>
         </div>
         <section id="tabla_bruto">
