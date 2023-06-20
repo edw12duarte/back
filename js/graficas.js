@@ -68,8 +68,9 @@ function grafica_linea(contenedor, datos){
         plot_bgcolor:"rgba(255, 255, 255, 0.4)" //Color del fondo de la grafica
 
     }
-    console.log(grafica_1.height());
-Plotly.newPlot(contenedor, data3, layout3);
+    var config = {responsive: true}
+
+Plotly.newPlot(contenedor, data3, layout3, config);
 }
 
 
@@ -116,7 +117,9 @@ function top_barras(contenedor ,datos){
         plot_bgcolor:"rgba(255, 255, 255, 0,5)"//Color del fondo de la grafica
     };
 
-Plotly.newPlot(contenedor, data4, layout4);
+    var config = {responsive: true}
+
+Plotly.newPlot(contenedor, data4, layout4, config);
 }
 
 
@@ -241,7 +244,8 @@ function dibujar_mapa(datos){
         height: map.height(), 
         margin: {t: 0, b: 0, l:0, r:0}};
 
-    var config = {mapboxAccessToken: "pk.eyJ1IjoiZWR3MjM0LSIsImEiOiJjbGl3MHh3dmswY2tyM2hsbXNubmg5YjQwIn0.ZS9jomCXDX3yRCCfEtic7g"};
+    var config = {mapboxAccessToken: "pk.eyJ1IjoiZWR3MjM0LSIsImEiOiJjbGl3MHh3dmswY2tyM2hsbXNubmg5YjQwIn0.ZS9jomCXDX3yRCCfEtic7g",
+                responsive: true};
 
     Plotly.newPlot('mapa', data, layout, config);
 }
