@@ -66,23 +66,23 @@
                         <thead>
                             <td class="titulo_tabla" id='titulo_tabla_1' colspan="3"></td>
                             <tr>
-                                <td>Codigo departamento</td>
+                                <td>Cod departamento</td>
                                 <td>habitantes</td>
                                 <td>Bandera</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>codigo dep</td>
-                                <td>1000000</td>
-                                <td>bandera</td>
+                                <td id="codigo_departamento">codigo dep</td>
+                                <td id="poblacion_departamento">000000</td>
+                                <td id="bandera_departamento"><?php colocar_bandera($bandera_dep);?></td> <!--Aqui toco colocar la nbandera por php, porque haciendolo por el DOM, js presentaba errores-->
                             </tr>
                         </tbody>
                     </table>
                 
                     <table class="table" id="info_muni">
                         <thead>
-                            <td class="titulo_tabla" colspan="3">Numero de municipios de <span id="titulo_tabla_2">###</span> : </td>
+                            <td class="titulo_tabla" colspan="3">Numero de municipios de <span id="titulo_tabla_2"></span> : <span id="cant_municipios"></span></td>
                             <tr>
                                 <td>Municipio Mayor indicador</td>
                                 <td>Municipio Menor indicador</td>
@@ -90,19 +90,19 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>nombre muni mayor</td>
-                                <td>nombre muni menor</td>
+                                <td id="nombre_muni_mayor">No encontrado</td>
+                                <td id="nombre_muni_menor">No encontrado</td>
                             </tr>
                             <tr>
-                                <td>1000000</td>
-                                <td>1</td>
+                                <td id="valor_muni_mayor">No encontrado</td>
+                                <td id="valor_muni_menor">No encontrado</td>
                             </tr>
                         </tbody>
                     </table>
                 
                     <table class="table" id="info_ips">
                         <thead>
-                            <td class="titulo_tabla" colspan="3">Numero de ips de <span id="titulo_tabla_3">###</span> :</td>
+                            <td class="titulo_tabla" colspan="3">Numero de ips de <span id="titulo_tabla_3"></span> : <span id="cant_ips"></span></td>
                             <tr>
                                 <td>Ips Mayor indicador</td>
                                 <td>IPS Menor indicador</td>
@@ -110,12 +110,12 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>nombre ips mayor</td>
-                                <td>nombre ips menor</td>
+                                <td id="nombre_ips_mayor">No encontrado</td>
+                                <td id="nombre_ips_menor">No encontrado</td>
                             </tr>
                             <tr>
-                                <td>1000000</td>
-                                <td>1</td>
+                                <td id="valor_ips_mayor">No encontrado</td>
+                                <td id="valor_ips_menor">No encontrado</td>
                             </tr>
                         </tbody>
                     </table>
@@ -123,12 +123,14 @@
                 </div>
                 <div id="cont_graf_1">
                     <h3 class="titulo_graf_linea">Departamento</h3>
-                    <div id="grafica1" class="graf_1"></div>
+                    <div id="grafica1" class="graf_linea"></div>
                 </div>
             </div>
             <div id="ind_map">
                 <div class="grupo_tarjetas">
                     <div id="tarjeta_1" class="tarjeta">
+                    </div>
+                    <div id="tarjeta_mitad" class="tarjeta">
                     </div>
                     <div id="tarjeta_2" class="tarjeta">
                     </div>
@@ -146,10 +148,7 @@
                 </div>
             </div>
         </div>
-        <section id="tabla_bruto">
-            <div id="num_registros"></div>
-            <div id="tabla_registros"></div>
-        </section>
+        <hr>
     </section>
     <script src="js/app.js"></script>
     <script src="js/graficas.js"></script>

@@ -67,11 +67,13 @@
         $query_indicador_pais = mysqli_query($conexion ,$sql_sentencia_0);
 
         $datos = mysqli_fetch_array($query_indicador_pais);
+        $factor_ind = $datos['factor'];
         
         $datos_indicador_pais = ($datos['numerador']/$datos['denominador'])*$datos['factor'];
 
         echo '<script>
             var datos_indicador_pais = "'.$datos_indicador_pais.'"
+            var factor_ind ="'.$factor_ind.'"
             </script>';
 
 
@@ -157,7 +159,7 @@
 
         while($datos = mysqli_fetch_array($query_grafico_mapa)){
 
-            $cod_municipio = $datos['cod_municipio'];
+            $cod_municipio = strlen($datos['cod_municipio']) == 4 ? '0'.$datos['cod_municipio']: $datos['cod_municipio']; // Si el codigo de municipio es de 4 digitos, se le agrega un '0' al principio para que concida con el codigo del archivo json
             $denominador = ($datos['denominador'] == 0) ? 1 : $datos['denominador'];
 
             $valor = ($datos['numerador']/$denominador)*$datos['factor'];
@@ -172,11 +174,121 @@
             </script>';
 
 
+//Traer codigo, nombre y bandera departamento==============================================================================
+
+        $sql_sentencia_0 = 'SELECT poblacion, bandera 
+                            FROM departamento_cod
+                            WHERE pk_id_departamento ='.$id_departamento;
+
+        $query_datos_dep = mysqli_query($conexion, $sql_sentencia_0);
+        
+        $datos = mysqli_fetch_array($query_datos_dep);
+        $poblacion_dep = $datos['poblacion'];
+        $bandera_dep = $datos['bandera'];
+
+        echo "<script>
+            var poblacion_dep = '".$poblacion_dep."'
+            </script>";
+
+
+// ind max y min por ips======================================================================================================================
+
+        $sql_sentencia_0 = 'SELECT  ips, valor
+                            FROM datos_efectividad
+                            WHERE indicador_id ='.$id_indicador.' and cod_depto='.$id_departamento.' and fecha='.$id_fecha.'
+                            GROUP BY ips 
+                            ORDER BY valor ASC limit 1';
+
+        $query_ips_menor = mysqli_query($conexion, $sql_sentencia_0);
+                
+        $datos_ips_menor = mysqli_fetch_assoc($query_ips_menor); //-----> mysqli_fetch_assoc: devuelve un objeto {name_1:valor_1, name_2:valor_2}
+        $datos_ips_menor = json_encode($datos_ips_menor);
+
+
+        $sql_sentencia_0 = 'SELECT  ips, valor
+                            FROM datos_efectividad
+                            WHERE indicador_id ='.$id_indicador.' and cod_depto='.$id_departamento.' and fecha='.$id_fecha.'
+                            GROUP BY ips 
+                            ORDER BY valor DESC limit 1';
+
+        $query_ips_mayor = mysqli_query($conexion, $sql_sentencia_0);
+                
+        $datos_ips_mayor = mysqli_fetch_object($query_ips_mayor); //-----> mysqli_fetch_assoc: devuelve un objeto {name_1:valor_1, name_2:valor_2}
+        $datos_ips_mayor = json_encode($datos_ips_mayor);
+
+
+        echo "<script>
+            var datos_ips_mayor = '".$datos_ips_mayor."'
+            var datos_ips_menor = '".$datos_ips_menor."'
+            </script>";
+
+
+//ind max y min por municipio===========================================================================================================================
+
+        $sql_sentencia_0 = 'SELECT  municipio, valor
+                            FROM datos_efectividad
+                            WHERE indicador_id ='.$id_indicador.' and cod_depto='.$id_departamento.' and fecha='.$id_fecha.'
+                            GROUP BY municipio 
+                            ORDER BY valor ASC limit 1';
+
+        $query_muni_menor = mysqli_query($conexion, $sql_sentencia_0);
+                
+        $datos_muni_menor = mysqli_fetch_assoc($query_muni_menor); //-----> mysqli_fetch_assoc: devuelve un objeto {name_1:valor_1, name_2:valor_2}
+        $datos_muni_menor = json_encode($datos_muni_menor);
+
+
+        $sql_sentencia_0 = 'SELECT  municipio, valor
+                            FROM datos_efectividad
+                            WHERE indicador_id ='.$id_indicador.' and cod_depto='.$id_departamento.' and fecha='.$id_fecha.'
+                            GROUP BY municipio 
+                            ORDER BY valor DESC limit 1';
+
+        $query_muni_mayor = mysqli_query($conexion, $sql_sentencia_0);
+                
+        $datos_muni_mayor = mysqli_fetch_object($query_muni_mayor); //-----> mysqli_fetch_assoc: devuelve un objeto {name_1:valor_1, name_2:valor_2}
+        $datos_muni_mayor = json_encode($datos_muni_mayor);
+
+
+        echo "<script>
+            var datos_muni_mayor = '".$datos_muni_mayor."'
+            var datos_muni_menor = '".$datos_muni_menor."'
+            </script>";
+
+// Cantidad de municipios por departamento =====================================================================================
+
+        $sql_sentencia_0 = 'SELECT  COUNT(DISTINCT (municipio)) as cant_mun
+                            FROM datos_efectividad
+                            WHERE indicador_id ='.$id_indicador.' and cod_depto='.$id_departamento.' and fecha='.$id_fecha;
+
+        $query_cant_muni = mysqli_query($conexion, $sql_sentencia_0);
+
+        $cant_muni = mysqli_fetch_assoc($query_cant_muni); 
+        $cant_muni = json_encode($cant_muni);
+
+
+// Cantidad de municipios e ips por departamento =====================================================================================
+
+        $sql_sentencia_0 = 'SELECT  COUNT(DISTINCT (ips)) as cant_ips
+                            FROM datos_efectividad
+                            WHERE indicador_id ='.$id_indicador.' and cod_depto='.$id_departamento.' and fecha='.$id_fecha;
+
+        $query_cant_ips = mysqli_query($conexion, $sql_sentencia_0);
+
+        $cant_ips = mysqli_fetch_assoc($query_cant_ips); 
+        $cant_ips = json_encode($cant_ips);
+
+        echo "<script>
+            var cant_ips = '".$cant_ips."'
+            var cant_muni = '".$cant_muni."'
+            </script>";
 
     }else{
-        echo 'else';
+        echo 'fallo';
+    }
+
+    function colocar_bandera($bandera_dep){
+        echo '<img src="'.$bandera_dep.'" style="border: 1px solid black;">';
     }
     
-
     
 ?>

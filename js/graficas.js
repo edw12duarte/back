@@ -1,5 +1,5 @@
 
-//Grafica 1-2: semi-circulo
+//Grafica 1-2: semi-circulo=======================================================
 /*
     Necesita 3 parametros
     contenedor(string): id del contenedor de la grafica
@@ -32,7 +32,7 @@ function indicador_semi_circulo(contenedor, titulo, valor){
 }
 
 
-//grafica 3: Linea de tiempo indicador por region
+//grafica 3: Linea de tiempo indicador por region========================================
 /*
     necesita 2 parametros:
     contenedor(string): 'id' del elemento donse se va hacer la grafica
@@ -62,7 +62,7 @@ Plotly.newPlot(contenedor, data3, layout3);
 
 
 
-//grafica 4: top barras -> indicador por municipio
+//grafica 4: top barras -> indicador por municipio=============================
 /*
     necesita 2 parametros:
     contenedor (string): 'id' del elemento donse se va hacer la grafica
@@ -81,6 +81,7 @@ function top_barras(contenedor ,datos){
         text: yValue.map(String),
         textposition: 'outside',
         hovertemplate: '%{y} <br> %{x}',
+        hoverlabel:{namelength:0, align:"rigth"},
         marker: {
             color: '#0a2535',
             opacity: 0.6,
@@ -112,44 +113,78 @@ Plotly.newPlot(contenedor, data4, layout4);
     Cambia los textos del dashboard
     nd: nombre departamento
     ni: nombre indicador
-    f: factor
+    f: fecha
+    ff : factor --> indica el numero de personas en el que se aplica el valor del indicador "20 de cada 'factor' personas"
 */
-function cambiar_nombres(nd, ni, f){
+
+function cambiar_nombres(nd, ni, f, ff){
 
     $('#titulo_tabla_1').text(nd);
-    $('#titulo_indicador').text(' '+ni+': '+f+' ');
+    $('#titulo_indicador').html('<h6> '+ ni + '</h6>');
+    $('#tarjeta_mitad').html('<strong>año: ' + f + '</strong> <br> <strong>factor: ' + ff + '</strong>');
     $('.titulo_graf_linea').text(nd);
     $('.titulo_muni_barras').text('Top 10 municipios : '+nd);
     $('.titulo_ips_barras').text('Top 10 ips: '+nd);
     $('#titulo_tabla_2').text(nd);
     $('#titulo_tabla_3').text(nd);
-    //console.log(nd);
-    //console.log(ni);
-    //console.log(f);
+}
+
+console.log(datos_ips_menor);
+console.log(datos_ips_mayor);
+
+console.log(datos_muni_mayor);
+console.log(datos_muni_menor);
+
+
+function informacion_tarjetas(){
+
+    let muni_menor = JSON.parse(datos_muni_menor);
+    let muni_mayor = JSON.parse(datos_muni_mayor);
+
+    let ips_menor = JSON.parse(datos_ips_menor);
+    let ips_mayor = JSON.parse(datos_ips_mayor);
+
+
+    $('#codigo_departamento').text(id_departamento);
+    $('#poblacion_departamento').text(poblacion_dep);
+
+    $('#nombre_muni_mayor').text(muni_mayor.municipio);
+    $('#valor_muni_mayor').text(muni_mayor.valor);
+
+    $('#nombre_muni_menor').text(muni_menor.municipio);
+    $('#valor_muni_menor').text(muni_menor.valor);
+
+
+    $('#nombre_ips_mayor').text(ips_mayor.ips);
+    $('#valor_ips_mayor').text(ips_mayor.valor);
+
+    $('#nombre_ips_menor').text(ips_menor.ips);
+    $('#valor_ips_menor').text(ips_menor.valor);
+
+    $('#cant_municipios').text(JSON.parse(cant_muni).cant_mun);
+    $('#cant_ips').text(JSON.parse(cant_ips).cant_ips);
+
 }
 
 
-$(document).ready(()=>{
-    cambiar_nombres(nombre_departamento,nombre_indicador, fecha);
+// Crear el MAPA DINAMICO==================================================================
 
-    indicador_semi_circulo('tarjeta_1','Indicador país', datos_indicador_pais);
-    indicador_semi_circulo('tarjeta_2','Indicador departamento', datos_indicador_depart);
-    
-    grafica_linea('grafica1' ,datos_grafica_linea);
-    
-    top_barras('muni_barras_top', datos_barras_muni);
-    top_barras('ips_barras_top', datos_barras_ips);
-});
 
-//==================================================================
+/*  
+    Esta funcion se encarga de organizar los datos para luego dibujar el mapa
+    Recibe 2 parametro:
+    data_json(object): Todos los datos traido del archivo json
+    datos_grafico_mapa(object): Los datos traidos de mysql
 
-// Convierte el formato de 'id_departamento' traido de mysql,
-// para compararlo con 'id' del archivo 'municipios_2.json'
+    returna un objeto:{'data':datos_mapa_json,
+                        'locations':datos_locations,
+                        'z':datos_z};
+*/
 
-function datos_para_mapa(data_json, datos_grafico_mapa) {
+let id_departamento_2 = (id_departamento.length > 1) ? id_departamento : '0'+id_departamento ; // Si el codigo de departamento es de 1 digito, se le agrega un '0' al principio para que concida con el codigo del archivo json
 
-    id_departamento = (id_departamento.length > 1) ? id_departamento: '0'+id_departamento ;
-    datos_mapa_json = data_json;//[id_departamento];
+function config_datos_mapa(data_json, datos_grafico_mapa) {
+    datos_mapa_json = data_json;
 
     datos_locations= [];
     datos_z=[];
@@ -169,7 +204,16 @@ function datos_para_mapa(data_json, datos_grafico_mapa) {
 }
 
 
-function crear_mapa(datos){
+
+// Se encarga el mapa por medio de plotly
+/*
+    Recibe un parametro:
+    datos(object): recibe los datos ya configurados para crearl el mapa
+                    {'data':datos_mapa_json,
+                    'locations':datos_locations,
+                    'z':datos_z};
+*/
+function dibujar_mapa(datos){
     let map = $('#mapa');
 
     var data = [{
@@ -178,11 +222,11 @@ function crear_mapa(datos){
         z: datos['z'],
         geojson: datos['data'],
         zauto: true, 
-        colorbar: {y: 0, yanchor: "bottom", title: {text: "Colombia", side: "right"}}
+        colorbar: {y: 0, yanchor: "bottom", ticklabelposition:"inside"}
         }];
 
     var layout = {
-        mapbox: {style: "outdoors", center: {lon: -74.3, lat: 4.5}, zoom: 4.5}, 
+        mapbox: {style: "outdoors", center: {lon: -74.3, lat: 4.5}, zoom: 4}, 
         width: map.width(),
         height: map.height(), 
         margin: {t: 0, b: 0, l:0, r:0}};
@@ -193,22 +237,38 @@ function crear_mapa(datos){
 }
 
 
-$(document).ready(()=>{
-
+//LLama los datos de los JSON y la funciones : config_datos_mapa() y dibujar_mapa()
+function crear_mapa(){
     $.ajax({
-        url: 'source/jsons_municipios/'+id_departamento+'.json',//'source/municipios_2_id.json',
+        url: 'source/jsons_municipios/'+id_departamento_2+'.json',
         type:  "POST",
         dataType: 'json',
         success: function(data) {
-            let datos_crear_mapa = datos_para_mapa(data, datos_grafico_mapa);
-            crear_mapa(datos_crear_mapa);  // Llama a la funcion crear_mapa
+            let datos_crear_mapa = config_datos_mapa(data, datos_grafico_mapa);
+            dibujar_mapa(datos_crear_mapa);                                       // Llama a la funcion dibujar_mapa
         },
         error: function(){
             alert('Error en el envio:');
         }
     });
+}
+
+//============================================================================================
+
+$(document).ready(()=>{
+    cambiar_nombres(nombre_departamento,nombre_indicador, fecha, factor_ind);
+
+    indicador_semi_circulo('tarjeta_1','Indicador país', datos_indicador_pais);
+    indicador_semi_circulo('tarjeta_2','Indicador depto', datos_indicador_depart);
+    
+    grafica_linea('grafica1' ,datos_grafica_linea);
+    
+    top_barras('muni_barras_top', datos_barras_muni);
+    top_barras('ips_barras_top', datos_barras_ips);
+    crear_mapa();
+
+    informacion_tarjetas();
+
 });
-
-
 
 
