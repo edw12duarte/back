@@ -1,4 +1,15 @@
 
+// primera_entrada : variable control que permite ACTIVAR todas las graficas
+// hasta que se OPRIME el boton Mostrar por primera vez
+
+if (primera_entrada == 1){
+    $('#contenido').css('display','none');
+}else{
+    $('#contenido').css('display','flex');
+}
+
+
+
 //Grafica 1-2: semi-circulo=======================================================
 /*
     Necesita 3 parametros
@@ -24,7 +35,7 @@ function indicador_semi_circulo(contenedor, titulo, valor){
         width: tarjeta.width(), 
         height: tarjeta.height(),
         margin:{t:50, b:5, l:0, r:0},
-        paper_bgcolor:"#C2BFBF",
+        paper_bgcolor: $('#tarjeta_mitad').css('background-color'),
         font:{size:10, color:'000000'}
     };
 
@@ -38,25 +49,26 @@ function indicador_semi_circulo(contenedor, titulo, valor){
     contenedor(string): 'id' del elemento donse se va hacer la grafica
     datos(object): los datos para graficar {'fecha':'valor'}
 */
-function grafica_linea(contenedor,datos){
+function grafica_linea(contenedor, datos){
     let grafica_1 = $('#'+contenedor);
     var data3 = [
         {
             x: Object.keys(datos),
             y: Object.values(datos),            
             type: 'scatter',
-            line: {shape: 'spline', dash: 'dot'}
+            line: {shape: 'spline', dash: 'dot', width:3}
         }
     ];
     var layout3 = {
         width: grafica_1.width() , 
-        height: grafica_1.height(),
+        height:grafica_1.height(),
         margin:{t:0, b:15, l:20, r:0},
-        paper_bgcolor:"#C2BFBF",
+        paper_bgcolor:"transparent", //color fondo layout
         font:{size:10, color:'000000'},
-        plot_bgcolor:"#C2BFBF"
+        plot_bgcolor:"rgba(255, 255, 255, 0.4)" //Color del fondo de la grafica
 
     }
+    console.log(grafica_1.height());
 Plotly.newPlot(contenedor, data3, layout3);
 }
 
@@ -84,7 +96,7 @@ function top_barras(contenedor ,datos){
         hoverlabel:{namelength:0, align:"rigth"},
         marker: {
             color: '#0a2535',
-            opacity: 0.6,
+            opacity: 0.9,
             line: {
                 color: '#000000',
                 width: 1.5
@@ -99,9 +111,9 @@ function top_barras(contenedor ,datos){
         width: contenedor_barras.width() , 
         height: contenedor_barras.height(),
         margin:{t:10, b:20, l:1, r:10},
-        paper_bgcolor:"#C2BFBF",
+        paper_bgcolor:"rgba(0, 0, 0, 0)", //color fondo layout
         font:{size:10, color:'000000'},
-        plot_bgcolor:"#C2BFBF"
+        plot_bgcolor:"rgba(255, 255, 255, 0,5)"//Color del fondo de la grafica
     };
 
 Plotly.newPlot(contenedor, data4, layout4);
@@ -129,12 +141,10 @@ function cambiar_nombres(nd, ni, f, ff){
     $('#titulo_tabla_3').text(nd);
 }
 
-console.log(datos_ips_menor);
-console.log(datos_ips_mayor);
-
-console.log(datos_muni_mayor);
-console.log(datos_muni_menor);
-
+/*
+    Cambia los textos del las tablas de informacion
+    no recibe argumentos
+*/
 
 function informacion_tarjetas(){
 
@@ -167,8 +177,8 @@ function informacion_tarjetas(){
 }
 
 
-// Crear el MAPA DINAMICO==================================================================
 
+// Crear el MAPA DINAMICO==================================================================
 
 /*  
     Esta funcion se encarga de organizar los datos para luego dibujar el mapa
@@ -256,12 +266,13 @@ function crear_mapa(){
 //============================================================================================
 
 $(document).ready(()=>{
+
     cambiar_nombres(nombre_departamento,nombre_indicador, fecha, factor_ind);
 
     indicador_semi_circulo('tarjeta_1','Indicador país', datos_indicador_pais);
     indicador_semi_circulo('tarjeta_2','Indicador depto', datos_indicador_depart);
     
-    grafica_linea('grafica1' ,datos_grafica_linea);
+    grafica_linea('grafica_linea' ,datos_grafica_linea);
     
     top_barras('muni_barras_top', datos_barras_muni);
     top_barras('ips_barras_top', datos_barras_ips);

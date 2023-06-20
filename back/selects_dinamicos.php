@@ -2,6 +2,8 @@
     
     include '../bd/conexion.php';
 
+// trae los option para el filtro de DEPARTAMENTO
+
     $id_indicador = $_POST['id_indicador'];
 
     $sql_departamento = 'SELECT DISTINCT DE.cod_depto, DC.nombre_departamento 
@@ -21,6 +23,7 @@
     }
 
 
+// trae los option para el filtro de FECHA
     $sql_fecha = 'SELECT DISTINCT fecha 
                 FROM datos_efectividad
                 WHERE indicador_id='.$id_indicador.'

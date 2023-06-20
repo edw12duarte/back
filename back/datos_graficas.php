@@ -1,9 +1,19 @@
 
 <?php
+
+    function colocar_bandera($bandera_dep){
+        echo '<img src="'.$bandera_dep.'" style="border: 1px solid black;">';
+    }
+
     include 'bd/conexion.php';
 
     
     if (isset($_POST['filtros'])){
+
+        echo "<script>
+            var primera_entrada = 0
+            </script>";
+
         $id_indicador = $_POST['id_indicador'];
         $id_departamento = $_POST['id_departamento'];
         $id_fecha = $_POST['id_fecha'];
@@ -147,6 +157,8 @@
         var datos_barras_ips = '.$datos_barras_ips.';
         </script>';
 
+
+
 //Traer datos para MAPA ==============================================================================
 
         $sql_sentencia_0 = 'SELECT cod_municipio, sum(numerador) as numerador, SUM(denominador) as denominador, avg(factor) as factor
@@ -174,8 +186,9 @@
             </script>';
 
 
-//Traer codigo, nombre y bandera departamento==============================================================================
 
+//Traer poblacio y bandera departamento ==============================================================================
+//NO SE PUDO TRAER LA INFORMACION DE LA BANDERA --> Esto se hace despues con la funcion : colocar_bandera()
         $sql_sentencia_0 = 'SELECT poblacion, bandera 
                             FROM departamento_cod
                             WHERE pk_id_departamento ='.$id_departamento;
@@ -189,6 +202,7 @@
         echo "<script>
             var poblacion_dep = '".$poblacion_dep."'
             </script>";
+
 
 
 // ind max y min por ips======================================================================================================================
@@ -223,6 +237,7 @@
             </script>";
 
 
+
 //ind max y min por municipio===========================================================================================================================
 
         $sql_sentencia_0 = 'SELECT  municipio, valor
@@ -254,6 +269,8 @@
             var datos_muni_menor = '".$datos_muni_menor."'
             </script>";
 
+
+
 // Cantidad de municipios por departamento =====================================================================================
 
         $sql_sentencia_0 = 'SELECT  COUNT(DISTINCT (municipio)) as cant_mun
@@ -264,6 +281,7 @@
 
         $cant_muni = mysqli_fetch_assoc($query_cant_muni); 
         $cant_muni = json_encode($cant_muni);
+
 
 
 // Cantidad de municipios e ips por departamento =====================================================================================
@@ -282,13 +300,14 @@
             var cant_muni = '".$cant_muni."'
             </script>";
 
+
+
     }else{
-        echo 'fallo';
+        echo "<script>
+            var primera_entrada = 1
+            </script>";
     }
 
-    function colocar_bandera($bandera_dep){
-        echo '<img src="'.$bandera_dep.'" style="border: 1px solid black;">';
-    }
     
     
 ?>

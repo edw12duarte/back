@@ -8,7 +8,8 @@
 }
 body{
     display: flex;
-    background-color: rgb(255, 255, 255);
+    background: linear-gradient(#2193b0,#6dd5ed);
+    background-attachment: fixed;
 }
 
 .tarjeta_principal::-webkit-scrollbar {
@@ -85,7 +86,7 @@ li .select_filtro{
 }
 
 
-#menu form .btn{
+#menu form #btn{
     width: 100px;
     height: 40px;
     color: white;
@@ -95,7 +96,7 @@ li .select_filtro{
     transition: all 0.3s ease;
 }
 
-#menu form .btn:hover{
+#menu form #btn:hover{
     border: 2px solid black;
     background-color: rgba(0, 0, 0, 0.6);
     box-shadow: 1px 1px 10px 2px black;
@@ -130,28 +131,33 @@ li .select_filtro{
 
 /*==============================================================*/
 
-#principal{
+.principal_activado{
     display: block;
     height: 100vh;
     width: 85vw;
 }
 
-#principal #titulo_indicador{
+.principal_activado #titulo_indicador{
     width: 98%;
     height: 10%;
     margin: 2px 1%;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(0, 0, 0, 0.126);
     border-radius: 10px;
-    text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: black;
     box-shadow: 10px 10px 20px black;
 }
 
-#principal #contenido{
+#titulo_indicador h6{
+    font-weight: 900;
+    color: rgb(255, 255, 255);
+    text-align: center;
+
+}
+
+.principal_activado #contenido{
     height: 90%;
     width: 100%;
     display: flex;
@@ -182,7 +188,7 @@ li .select_filtro{
     width: 100%;
     margin: 0.5% 0;
     border-radius: 15px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.3);
     overflow-y: auto;
 }
 
@@ -242,9 +248,10 @@ li .select_filtro{
     overflow-y: auto;
 }
 
-#cont_graf_1 #grafica_lineal{
+#cont_graf_1 #grafica_linea{
     width: 100%;
     height: 80%;
+    background-color: transparent;
 }
 
 #contenido #ind_map{
@@ -268,7 +275,7 @@ li .select_filtro{
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    background-color: white;
+    background-color: transparent;
     border-radius: 10px;
 }
 
@@ -278,6 +285,7 @@ li .select_filtro{
     align-items: center;
     font-size: 15px;
     color: black;
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 #ind_map #mapa{
@@ -314,8 +322,8 @@ li .select_filtro{
     margin: 0;
     padding-top: 2%;
     overflow-x: auto;
-    color: black;
-    background-color: rgb(177, 174, 174);
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
 }
 
 #cont_muni_barras #muni_barras_top, 

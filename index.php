@@ -19,14 +19,13 @@
 ?>
 
 <body>
-    <section id="espacio_menu">
+    <section id="espacio_menu" class="principal_activado">
         <section id="menu">
             <h1>Indicadores Monitoreo de la calidad de la Atención IPS - Efectividad</h1>
             <form action="" method="POST">
                 <ul>
                     <li>
                         <h4>Indicadores</h4>
-                        <!--<select  id="id_indicador" class="select_filtro" name="id_indicador" onchange="cambiar()">-->
                         <select  id="filtro_indicador" class="select_filtro" name="id_indicador">
                             <?php
                                 traer_options($conexion);
@@ -45,18 +44,19 @@
                         </select>
                     </li> 
                 </ul>
-                <input class="btn" type="submit" name="filtros" value="Mostrar">
+                <input id="btn" type="submit" name="filtros" value="Mostrar">
             </form>
-
             <div class="logo">
                 <h1>Ministerio de salud y proteccion social</h1>
                 <img src="source/1370px-Minsalud_Colombia.svg.png" alt="logo_minsalud">
             </div>
         </section>
     </section>
-    <section id="principal">
+
+
+    <section id="principal" class="principal_activado">
         <div id="titulo_indicador">
-            <h1>Nombre del indicador actual</h1>
+            <h1>Elija un indicador y pulse mostrar</h1>
         </div>
         <div id="contenido" >
             <div id="graficas">
@@ -75,7 +75,7 @@
                             <tr>
                                 <td id="codigo_departamento">codigo dep</td>
                                 <td id="poblacion_departamento">000000</td>
-                                <td id="bandera_departamento"><?php colocar_bandera($bandera_dep);?></td> <!--Aqui toco colocar la nbandera por php, porque haciendolo por el DOM, js presentaba errores-->
+                                <td id="bandera_departamento"><?php colocar_bandera($bandera_dep);?></td> <!--Aqui toco colocar la bandera por php, porque haciendolo por el DOM, js presentaba errores-->
                             </tr>
                         </tbody>
                     </table>
@@ -123,7 +123,7 @@
                 </div>
                 <div id="cont_graf_1">
                     <h3 class="titulo_graf_linea">Departamento</h3>
-                    <div id="grafica1" class="graf_linea"></div>
+                    <div id="grafica_linea"></div>
                 </div>
             </div>
             <div id="ind_map">
@@ -150,12 +150,7 @@
         </div>
         <hr>
     </section>
-    <script src="js/app.js"></script>
+    <script src="js/ajax_selects.js"></script>
     <script src="js/graficas.js"></script>
-    <!--<script src="js/ajax.js"></script>
-    <script src="js/jquery.min.js"></script>-->
 </body>
-<?php
-    //include 'back/datos_graficas.php';
-?>
 </html>

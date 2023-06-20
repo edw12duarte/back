@@ -1,4 +1,5 @@
 <?php
+//Trae la info del filtro de indicadores
     include 'bd/conexion.php';
 
     function traer_options($conexion){
@@ -14,19 +15,5 @@
         }
     }
 
-    /*
-    function envio_filtros(){
-        if(isset($_POST['filtros'])){
-            $id_indicador = $_POST['id_indicador'];
-            $id_departamento = $_POST['id_departamento'];
-            $id_fecha = $_POST['id_fecha'];
-            
-            echo '<h1>id indicador= '.$id_indicador.'<br>
-                    id departamento='.$id_departamento.'<br>
-                    id fecha = '.$id_fecha.'
-                </h1>';
-        }
-    }
-    */
 ?>
 
